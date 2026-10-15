@@ -1,0 +1,88 @@
+@if (data.loading()) {
+  <div class="container section text-center">
+    <div class="spinner-border text-navy mb-3" style="width: 3rem; height: 3rem;"></div>
+    <h4>Verificando el estado de tu pago...</h4>
+    <p class="text-muted-brand">Validando con la pasarela de pagos, por favor espera un momento.</p>
+  </div>
+} @else if (data.value(); as info) {
+  <app-page-hero
+    [title]="info.status === 'approved' ? '¡Gracias por tu compra!' : 'Estado del Pedido'"
+    eyebrow="Confirmación"
+    [crumbs]="[{ label: 'Servicios', link: '/servicios' }, { label: 'Descarga' }]"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card card-soft p-4 p-md-5 text-center">
+            @if (info.status === 'approved') {
+              <div class="status-badge approved mb-3">
+                <i class="bi bi-check-circle-fill"></i>
+              </div>
+              <h2 class="h3 mb-2">Pago Confirmado con Éxito</h2>
+              <p class="text-muted-brand mb-4">
+                Tu pago para <strong>{{ info.product_title }}</strong> ha sido acreditado correctamente.
+              </p>
+
+              @if (info.kind === 'webapp') {
+                <div class="alert alert-success p-4 mb-4">
+                  <h5 class="alert-heading"><i class="bi bi-window-fullscreen me-2"></i>Acceso a tu Aplicación Web</h5>
+                  <p class="mb-3">Tu sistema ya se encuentra disponible para su uso.</p>
+                  @if (info.url) {
+                    <a [href]="info.url" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
+                      <i class="bi bi-box-arrow-up-right me-2"></i> Abrir Aplicación Web Ahora
+                    </a>
+                  }
+                </div>
+              } @else {
+                <div class="p-4 rounded-4 bg-light mb-4 text-start">
+                  <h5 class="h6 text-navy mb-2"><i class="bi bi-file-earmark-arrow-down me-2"></i>Descarga tu programa o plantilla</h5>
+                  <p class="small text-muted-brand mb-3">
+                    El enlace temporal es generado de forma segura. Descarga tu archivo y guárdalo en tu computadora.
+                  </p>
+                  @if (info.url) {
+                    <a [href]="info.url" target="_blank" rel="noopener" download class="btn btn-accent btn-lg w-100">
+                      <i class="bi bi-download me-2"></i> Descargar Archivos (ZIP / Instalador)
+                    </a>
+                  }
+                  @if (info.message) {
+                    <small class="text-muted-brand d-block mt-2 fst-italic">{{ info.message }}</small>
+                  }
+                </div>
+              }
+
+              <div class="d-flex justify-content-center gap-3">
+                <a routerLink="/servicios" class="btn btn-outline-brand">Ver más servicios</a>
+                <a routerLink="/" class="btn btn-brand">Volver al Inicio</a>
+              </div>
+            } @else if (info.status === 'pending' || info.status === 'in_process') {
+              <div class="status-badge pending mb-3">
+                <i class="bi bi-hourglass-split"></i>
+              </div>
+              <h2 class="h3 mb-2">Pago en Proceso</h2>
+              <p class="text-muted-brand mb-4">
+                Si pagaste a través de OXXO o transferencia SPEI, la confirmación puede tardar unos minutos o un par de horas hábiles. En cuanto se confirme, tu enlace se activará automáticamente.
+              </p>
+              <button class="btn btn-brand" (click)="windowReload()">Actualizar Estado</button>
+            } @else {
+              <div class="status-badge rejected mb-3">
+                <i class="bi bi-x-circle-fill"></i>
+              </div>
+              <h2 class="h3 mb-2">Pago No Completado</h2>
+              <p class="text-muted-brand mb-4">
+                El pago no pudo procesarse o fue cancelado por el banco. Por favor intenta con otro método de pago.
+              </p>
+              <a routerLink="/servicios" class="btn btn-brand">Intentar de Nuevo</a>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+} @else {
+  <app-empty-state icon="bi-receipt" title="Pedido no encontrado" message="No pudimos encontrar la información del pedido solicitado.">
+    <a routerLink="/" class="btn btn-brand">Ir al Inicio</a>
+  </app-empty-state>
+}
+

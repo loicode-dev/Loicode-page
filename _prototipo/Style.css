@@ -1,0 +1,15 @@
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+body{
+    background: black;
+}
+
+#hero{
+    margin-top: 100px;
+}

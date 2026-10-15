@@ -1,0 +1,17 @@
+# CHECKLIST DE LANZAMIENTO WEB · LOI CODE
+Descarga gratuita. Revisa cada punto antes de hacer público tu sitio web:
+
+[ ] 1. Favicon configurado y visible en todas las pestañas.
+[ ] 2. Título (Title) y Meta Description únicos en cada página.
+[ ] 3. Open Graph (og:title, og:image, og:description) para compartir en redes sociales.
+[ ] 4. Responsive comprobado en teléfonos Android, iPhone y tablets.
+[ ] 5. Formularios de contacto probados (que lleguen a la base de datos o correo).
+[ ] 6. Enlaces de WhatsApp probados con mensajes predeterminados.
+[ ] 7. Páginas 404 personalizadas y funcionales.
+[ ] 8. Optimización de imágenes (formato WebP o compresión adecuada).
+[ ] 9. Certificado SSL activo (HTTPS).
+[ ] 10. Pasarela de pagos en modo producción probada con una transacción real.
+
+LOI CODE · Desarrollo Web, Invitaciones & Apps
+Visítanos en https://loicode.com
+

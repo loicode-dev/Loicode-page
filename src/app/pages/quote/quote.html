@@ -1,0 +1,123 @@
+<app-page-hero
+  title="Cotiza tu Proyecto a la Medida"
+  eyebrow="Presupuesto sin compromiso"
+  subtitle="Cuéntanos tus requerimientos y te responderemos en menos de 24 horas con una propuesta adaptada a tu presupuesto."
+  [crumbs]="[{ label: 'Cotizar' }]"
+/>
+
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        @if (isSubmitted()) {
+          <div class="card card-soft p-5 text-center fade-in">
+            <div class="success-icon mb-3"><i class="bi bi-check-circle-fill"></i></div>
+            <h2 class="h3 mb-2">¡Solicitud recibida con éxito!</h2>
+            <p class="text-muted-brand mb-4">
+              Gracias por comunicarte con <strong>LOI CODE</strong>. Hemos recibido tus requerimientos y nos pondremos en contacto contigo a la brevedad.
+            </p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+              <a [href]="whatsappDirectUrl" target="_blank" rel="noopener" class="btn btn-accent">
+                <i class="bi bi-whatsapp me-2"></i> Continuar por WhatsApp
+              </a>
+              <a routerLink="/" class="btn btn-outline-brand">Volver al Inicio</a>
+            </div>
+          </div>
+        } @else {
+          <div class="card card-soft p-4 p-md-5">
+            @if (selectedProductName()) {
+              <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                <div>Cotizando servicio: <strong>{{ selectedProductName() }}</strong></div>
+              </div>
+            }
+
+            @if (errorMessage()) {
+              <div class="alert alert-danger mb-4" role="alert">
+                <i class="bi bi-exclamation-octagon-fill me-2"></i> {{ errorMessage() }}
+              </div>
+            }
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="name">Nombre completo *</label>
+                  <input id="name" type="text" class="form-control" formControlName="name" placeholder="Ej. Ana García" />
+                  @if (form.get('name')?.touched && form.get('name')?.invalid) {
+                    <small class="text-danger">Por favor ingresa tu nombre.</small>
+                  }
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="phone">Teléfono / WhatsApp *</label>
+                  <input id="phone" type="tel" class="form-control" formControlName="phone" placeholder="Ej. 55 1234 5678" />
+                  @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
+                    <small class="text-danger">Ingresa un número válido para contactarte.</small>
+                  }
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="email">Correo electrónico (opcional)</label>
+                  <input id="email" type="email" class="form-control" formControlName="email" placeholder="correo@ejemplo.com" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="service">Servicio requerido *</label>
+                  <select id="service" class="form-select" formControlName="service">
+                    @for (c of categories; track c.key) {
+                      <option [value]="c.key">{{ c.label }}</option>
+                    }
+                  </select>
+                </div>
+
+                <!-- Campos adicionales para Invitaciones -->
+                @if (isInvitaciones) {
+                  <div class="col-md-6">
+                    <label class="form-label" for="celebrantName">Nombre de la festejada/o o novios</label>
+                    <input id="celebrantName" type="text" class="form-control" formControlName="celebrantName" placeholder="Ej. Valentina (XV años)" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="eventDate">Fecha estimada del evento</label>
+                    <input id="eventDate" type="date" class="form-control" formControlName="eventDate" />
+                  </div>
+                }
+
+                <div class="col-md-6">
+                  <label class="form-label" for="budget">Presupuesto estimado (opcional)</label>
+                  <input id="budget" type="text" class="form-control" formControlName="budget" placeholder="Ej. $3,000 - $6,000 MXN" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="deadline">Tiempo de entrega deseado (opcional)</label>
+                  <input id="deadline" type="text" class="form-control" formControlName="deadline" placeholder="Ej. 2 semanas, 1 mes..." />
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="message">Detalles del proyecto o requerimientos *</label>
+                  <textarea id="message" rows="4" class="form-control" formControlName="message" placeholder="Cuéntanos todo lo que necesitas para tu desarrollo..."></textarea>
+                  @if (form.get('message')?.touched && form.get('message')?.invalid) {
+                    <small class="text-danger">Por favor describe brevemente tu idea (al menos 10 caracteres).</small>
+                  }
+                </div>
+
+                <div class="col-12 mt-4 text-center">
+                  <button type="submit" class="btn btn-brand btn-lg w-100 mb-2" [disabled]="isSubmitting()">
+                    @if (isSubmitting()) {
+                      <span class="spinner-border spinner-border-sm me-2"></span> Enviando cotización...
+                    } @else {
+                      <i class="bi bi-send-fill me-2"></i> Enviar Solicitud de Cotización
+                    }
+                  </button>
+                  <small class="text-muted-brand d-block">
+                    Tus datos se manejan de forma estrictamente confidencial.
+                  </small>
+                </div>
+              </div>
+            </form>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+

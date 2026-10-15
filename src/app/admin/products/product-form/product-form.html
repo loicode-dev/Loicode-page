@@ -1,0 +1,142 @@
+<div class="mb-4">
+  <a routerLink="/admin/productos" class="text-muted-brand small text-decoration-none">← Volver a la lista</a>
+  <h1 class="h3 font-outfit text-navy mt-1">{{ id() ? 'Editar Producto' : 'Nuevo Producto / Servicio' }}</h1>
+</div>
+
+@if (errorMsg()) {
+  <div class="alert alert-danger mb-4">{{ errorMsg() }}</div>
+}
+
+<div class="card card-soft p-4 p-md-5">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <!-- Título y Slug -->
+      <div class="col-md-6">
+        <label class="form-label">Título del Producto / Servicio *</label>
+        <input type="text" class="form-control" formControlName="title" (input)="onTitleChange()" placeholder="Ej. Invitación XV Años Personalizada" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Slug (URL amigable) *</label>
+        <input type="text" class="form-control" formControlName="slug" placeholder="invitacion-xv-personalizada" />
+      </div>
+
+      <!-- Categoría y Tipo -->
+      <div class="col-md-4">
+        <label class="form-label">Categoría *</label>
+        <select class="form-select" formControlName="category">
+          @for (c of categories; track c.key) {
+            <option [value]="c.key">{{ c.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Tipo de Producto *</label>
+        <select class="form-select" formControlName="kind">
+          <option value="custom">A la medida (Formulario de cotización)</option>
+          <option value="download">Descargable (Código, plantilla, software)</option>
+          <option value="webapp">App Web (Redirección a URL)</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Precio en MXN (Dejar vacío o 0 si es GRATIS)</label>
+        <input type="number" class="form-control" formControlName="price" placeholder="Ej. 400 (o vacío para Gratis)" />
+        <small class="text-muted-brand">Si el precio es vacío o 0, el sistema lo cataloga automáticamente como <strong>Recurso Gratuito</strong>.</small>
+      </div>
+
+      <!-- Imagen de portada -->
+      <div class="col-12">
+        <label class="form-label">Imagen de Portada (URL o Subir archivo)</label>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" formControlName="cover_url" placeholder="https://... o assets/img/..." />
+          <input type="file" #fileInput (change)="onUploadCover($event)" class="d-none" accept="image/*" />
+          <button type="button" class="btn btn-outline-secondary" (click)="fileInput.click()" [disabled]="isUploading()">
+            @if (isUploading()) {
+              <span class="spinner-border spinner-border-sm"></span> Subiendo...
+            } @else {
+              <i class="bi bi-cloud-arrow-up me-1"></i> Subir a Storage
+            }
+          </button>
+        </div>
+        @if (form.get('cover_url')?.value) {
+          <img [src]="form.get('cover_url')?.value" class="rounded-3 mt-2" style="max-height: 120px; object-fit: cover;" />
+        }
+      </div>
+
+      <!-- Descripción corta y larga -->
+      <div class="col-12">
+        <label class="form-label">Descripción Corta (aparece en las cards) *</label>
+        <textarea rows="2" class="form-control" formControlName="short_description" placeholder="Resumen conciso..."></textarea>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Descripción Completa (Formato Markdown) *</label>
+        <textarea rows="6" class="form-control font-monospace" formControlName="description" placeholder="## ¿Qué incluye?\n- Característica 1\n- Característica 2..."></textarea>
+      </div>
+
+      <!-- Enlaces condicionales -->
+      <div class="col-md-6">
+        <label class="form-label">URL de Demo Pública (Opcional)</label>
+        <input type="text" class="form-control" formControlName="demo_url" placeholder="/invitaciones/misXV/sofia/index.html o https://..." />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">URL Externa (Para App Web)</label>
+        <input type="text" class="form-control" formControlName="external_url" placeholder="https://miapp.com" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">URL Archivo Gratuito (Direct Download)</label>
+        <input type="text" class="form-control" formControlName="file_url" placeholder="assets/demo/checklist.txt o enlace público" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Ruta en Bucket Privado (Para producto de pago descargable)</label>
+        <input type="text" class="form-control" formControlName="file_path" placeholder="plantillas/mi-portafolio.zip" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Características (una por línea)</label>
+        <textarea rows="3" class="form-control" formControlName="featuresText" placeholder="Música de fondo\nCuenta regresiva\nMapa interactivo"></textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Etiquetas / Tags (separados por coma)</label>
+        <input type="text" class="form-control" formControlName="tagsText" placeholder="landing, angular, xv, ecommerce" />
+      </div>
+
+      <!-- Switches -->
+      <div class="col-12 d-flex flex-wrap gap-4 pt-3 border-top">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="pubSwitch" formControlName="is_published" />
+          <label class="form-check-label fw-semibold" for="pubSwitch">Publicado</label>
+        </div>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="featSwitch" formControlName="is_featured" />
+          <label class="form-check-label fw-semibold" for="featSwitch">Destacar en Inicio</label>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <label class="small text-muted-brand mb-0">Orden:</label>
+          <input type="number" class="form-control form-control-sm" style="width: 80px;" formControlName="sort_order" />
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="col-12 mt-4 text-end">
+        <a routerLink="/admin/productos" class="btn btn-outline-secondary me-2">Cancelar</a>
+        <button type="submit" class="btn btn-brand" [disabled]="isSaving()">
+          @if (isSaving()) {
+            <span class="spinner-border spinner-border-sm me-1"></span> Guardando...
+          } @else {
+            <i class="bi bi-save me-1"></i> Guardar Producto
+          }
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+

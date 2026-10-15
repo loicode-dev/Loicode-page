@@ -1,0 +1,14 @@
+.status-badge {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 2.5rem;
+
+  &.approved { background: rgba(22, 163, 74, 0.15); color: #16a34a; }
+  &.pending { background: rgba(234, 179, 8, 0.15); color: #ca8a04; }
+  &.rejected { background: rgba(220, 38, 38, 0.15); color: #dc2626; }
+}
+

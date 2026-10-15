@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg sticky-top" [class.scrolled]="scrolled()">
+  <div class="container">
+    <a class="navbar-brand py-0" routerLink="/" aria-label="LOI CODE - Inicio">
+      <img src="assets/img/logos/loicode_logo.png" alt="LOI CODE" height="56" />
+    </a>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      (click)="menuOpen.set(!menuOpen())"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mainNav"
+      aria-label="Abrir menú"
+    >
+      <i class="bi" [class.bi-list]="!menuOpen()" [class.bi-x-lg]="menuOpen()"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav" [class.show]="menuOpen()">
+      <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-lg-1">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/nosotros" routerLinkActive="active">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a>
+        </li>
+
+        <li
+          class="nav-item dropdown"
+          (mouseenter)="servicesOpen.set(true)"
+          (mouseleave)="servicesOpen.set(false)"
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            [class.active]="servicesActive()"
+            [attr.aria-expanded]="servicesOpen()"
+            (click)="$event.preventDefault(); servicesOpen.set(!servicesOpen())"
+          >
+            Servicios
+          </a>
+          <ul class="dropdown-menu shadow border-0" [class.show]="servicesOpen()">
+            @for (cat of categories; track cat.route) {
+              <li>
+                <a class="dropdown-item" [routerLink]="cat.route" routerLinkActive="active">
+                  <i class="bi {{ cat.icon }} me-2"></i>{{ cat.label }}
+                </a>
+              </li>
+            }
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" routerLink="/mis-xv" routerLinkActive="active">
+                <i class="bi bi-stars me-2"></i>Mis XV (portafolio)
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/servicios" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+                <i class="bi bi-grid me-2"></i>Ver todos
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recursos" routerLinkActive="active">
+            Recursos Gratuitos
+          </a>
+        </li>
+      </ul>
+
+      <a routerLink="/cotizar" class="btn btn-accent">
+        <i class="bi bi-lightning-charge-fill me-1"></i> Cotizar
+      </a>
+    </div>
+  </div>
+</nav>

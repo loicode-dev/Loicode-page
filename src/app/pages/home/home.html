@@ -1,0 +1,192 @@
+<!-- ───────── Carrusel de banners ───────── -->
+<section class="banner" aria-roledescription="carrusel">
+  @for (s of slides; track s.image; let i = $index) {
+    <a class="slide" [class.active]="current() === i" [routerLink]="s.link" [attr.aria-hidden]="current() !== i">
+      <img [src]="s.image" [alt]="s.alt" />
+    </a>
+  }
+  <button class="ctrl prev" type="button" (click)="prev()" aria-label="Anterior"><i class="bi bi-chevron-left"></i></button>
+  <button class="ctrl next" type="button" (click)="next()" aria-label="Siguiente"><i class="bi bi-chevron-right"></i></button>
+  <div class="dots">
+    @for (s of slides; track s.image; let i = $index) {
+      <button type="button" [class.active]="current() === i" (click)="current.set(i)" [attr.aria-label]="'Ir al banner ' + (i + 1)"></button>
+    }
+  </div>
+</section>
+
+<!-- ───────── Hero ───────── -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 fade-in">
+        <span class="eyebrow">Ideas que se vuelven código</span>
+        <h1 class="display-4 fw-bold text-white mb-3">
+          Hacemos que tu negocio <span class="highlight">brille</span> en internet
+        </h1>
+        <p class="lead text-white-50 mb-4">
+          Sitios web, invitaciones digitales y aplicaciones. Elige un servicio a la medida, compra un producto listo
+          para usar o descarga recursos gratuitos.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a routerLink="/servicios" class="btn btn-accent btn-lg">Ver servicios <i class="bi bi-arrow-right ms-1"></i></a>
+          <a routerLink="/recursos" class="btn btn-outline-light btn-lg"><i class="bi bi-gift me-1"></i> Recursos gratis</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-stats">
+          <div><strong>+50</strong><span>Proyectos</span></div>
+          <div><strong>3</strong><span>Líneas de servicio</span></div>
+          <div><strong>24h</strong><span>Respuesta</span></div>
+          <div><strong>100%</strong><span>Responsive</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Categorías ───────── -->
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Servicios</span>
+      <h2 class="section-title">¿Qué necesitas hoy?</h2>
+      <p class="section-lead">Tres líneas de servicio para llevar tu idea al siguiente nivel.</p>
+    </div>
+    <div class="row g-4">
+      @for (c of categories; track c.key) {
+        <div class="col-md-4">
+          <a [routerLink]="c.route" class="card card-soft hover-lift h-100 p-4 text-decoration-none category-card">
+            <div class="cat-icon mb-3"><i class="bi {{ c.icon }}"></i></div>
+            <h3 class="h4">{{ c.label }}</h3>
+            <p class="text-muted-brand mb-3">{{ c.subtitle }}</p>
+            <span class="fw-semibold text-navy mt-auto">Explorar <i class="bi bi-arrow-right"></i></span>
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Destacados ───────── -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <div>
+        <span class="eyebrow">Tienda</span>
+        <h2 class="section-title mb-0">Servicios y productos destacados</h2>
+      </div>
+      <a routerLink="/servicios" class="btn btn-outline-brand">Ver catálogo completo</a>
+    </div>
+    @if (featured.loading()) {
+      <app-skeleton-grid />
+    } @else {
+      <div class="row g-4">
+        @for (p of featured.value(); track p.id) {
+          <div class="col-md-6 col-lg-4"><app-product-card [product]="p" /></div>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ───────── Cómo funciona ───────── -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Así de fácil</span>
+      <h2 class="section-title">¿Cómo funciona?</h2>
+    </div>
+    <div class="row g-4">
+      @for (s of steps; track s.title; let i = $index) {
+        <div class="col-md-4 text-center">
+          <div class="step-num mb-3">{{ i + 1 }}</div>
+          <i class="bi {{ s.icon }} fs-1 text-navy"></i>
+          <h3 class="h5 mt-3">{{ s.title }}</h3>
+          <p class="text-muted-brand">{{ s.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Mis XV ───────── -->
+@if (xv.value()?.length) {
+  <section class="section xv-section">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div>
+          <span class="eyebrow">Portafolio</span>
+          <h2 class="section-title text-white mb-0">Invitaciones de XV años</h2>
+        </div>
+        <a routerLink="/mis-xv" class="btn btn-accent">Ver todas</a>
+      </div>
+      <div class="row g-4">
+        @for (inv of xv.value(); track inv.slug) {
+          <div class="col-md-4">
+            <a [href]="xvSvc.url(inv)" target="_blank" rel="noopener" class="xv-card hover-lift">
+              <img [src]="xvSvc.cover(inv)" [alt]="inv.name" loading="lazy" />
+              <div class="xv-info">
+                <small>{{ inv.theme }}</small>
+                <h3 class="h5 text-white mb-0">XV {{ inv.name }}</h3>
+              </div>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ───────── Recursos gratis ───────── -->
+@if (freebies.value()?.length) {
+  <section class="section">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div>
+          <span class="eyebrow">Gratis</span>
+          <h2 class="section-title mb-0">Recursos gratuitos</h2>
+        </div>
+        <a routerLink="/recursos" class="btn btn-outline-brand">Ver todos</a>
+      </div>
+      <div class="row g-4">
+        @for (p of freebies.value(); track p.id) {
+          <div class="col-md-6 col-lg-4"><app-product-card [product]="p" /></div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ───────── Blog ───────── -->
+@if (posts.value()?.length) {
+  <section class="section bg-white">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div>
+          <span class="eyebrow">Blog</span>
+          <h2 class="section-title mb-0">Lo último del blog</h2>
+        </div>
+        <a routerLink="/blog" class="btn btn-outline-brand">Ir al blog</a>
+      </div>
+      <div class="row g-4">
+        @for (p of posts.value(); track p.id) {
+          <div class="col-md-6 col-lg-4"><app-post-card [post]="p" /></div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ───────── CTA ───────── -->
+<section class="section-sm">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <h2 class="text-white mb-2">¿Tienes un proyecto en mente?</h2>
+        <p class="text-white-50 mb-0">Cuéntanos tu idea y te enviamos una cotización sin compromiso.</p>
+      </div>
+      <a routerLink="/cotizar" class="btn btn-accent btn-lg">Cotizar ahora</a>
+    </div>
+  </div>
+</section>
+

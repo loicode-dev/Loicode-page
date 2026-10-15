@@ -1,0 +1,113 @@
+@if (data.loading()) {
+  <div class="container section">
+    <div class="row g-5">
+      <div class="col-lg-7"><div class="skeleton ratio-cover"></div></div>
+      <div class="col-lg-5">
+        <div class="skeleton mb-3" style="height: 40px"></div>
+        <div class="skeleton mb-2" style="height: 16px"></div>
+        <div class="skeleton" style="height: 16px; width: 60%"></div>
+      </div>
+    </div>
+  </div>
+} @else if (product(); as p) {
+  <app-page-hero [title]="p.title" [eyebrow]="free() ? 'Recurso gratuito' : category()!.label" [crumbs]="crumbs()" />
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Galería + descripción -->
+        <div class="col-lg-7">
+          <div class="card card-soft overflow-hidden mb-3">
+            @if (images().length) {
+              <img [src]="activeImage() ?? images()[0]" [alt]="p.title" class="ratio-cover" />
+            } @else {
+              <div class="ratio-cover cover-placeholder"><i class="bi {{ category()!.icon }}"></i></div>
+            }
+          </div>
+          @if (images().length > 1) {
+            <div class="d-flex gap-2 flex-wrap mb-4">
+              @for (img of images(); track img) {
+                <button type="button" class="thumb" [class.active]="(activeImage() ?? images()[0]) === img" (click)="activeImage.set(img)">
+                  <img [src]="img" alt="" />
+                </button>
+              }
+            </div>
+          }
+
+          <div class="card card-soft p-4 p-lg-5">
+            <div class="prose" [innerHTML]="p.description | markdown"></div>
+          </div>
+        </div>
+
+        <!-- Panel de compra -->
+        <div class="col-lg-5">
+          <aside class="card card-soft p-4 buy-box">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              @if (free()) {
+                <span class="badge badge-free rounded-pill"><i class="bi bi-gift me-1"></i>Gratis</span>
+              } @else if (p.kind === 'custom') {
+                <span class="badge bg-light text-navy rounded-pill"><i class="bi bi-rulers me-1"></i>A la medida</span>
+              } @else {
+                <span class="badge bg-light text-navy rounded-pill">
+                  <i class="bi me-1" [class.bi-cloud]="p.kind === 'webapp'" [class.bi-download]="p.kind !== 'webapp'"></i>
+                  {{ p.kind === 'webapp' ? 'App web' : 'Producto descargable' }}
+                </span>
+              }
+              @for (t of p.tags; track t) {
+                <span class="badge rounded-pill text-bg-light">#{{ t }}</span>
+              }
+            </div>
+
+            <p class="text-muted-brand">{{ p.short_description }}</p>
+            <div class="price mb-3" [class.text-success]="free()">{{ p | price }}</div>
+
+            @if (p.features.length) {
+              <ul class="list-unstyled features mb-4">
+                @for (f of p.features; track f) {
+                  <li><i class="bi bi-check-circle-fill"></i> {{ f }}</li>
+                }
+              </ul>
+            }
+
+            <button type="button" class="btn btn-accent btn-lg w-100 mb-2" (click)="actions.run(p)">
+              <i class="bi {{ actionLabel()!.icon }} me-1"></i> {{ actionLabel()!.label }}
+            </button>
+            @if (p.demo_url) {
+              <a [href]="p.demo_url" target="_blank" rel="noopener" class="btn btn-outline-brand w-100 mb-3">
+                <i class="bi bi-eye me-1"></i> Ver demo
+              </a>
+            }
+
+            <div class="next-step small">
+              <i class="bi bi-info-circle me-1"></i> {{ nextStep() }}
+            </div>
+
+            @if (action() === 'buy') {
+              <div class="d-flex align-items-center gap-2 mt-3 small text-muted-brand">
+                <i class="bi bi-shield-lock-fill text-success"></i> Pago 100% seguro procesado por Mercado Pago
+              </div>
+            }
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  @if (related.value()?.length) {
+    <section class="section pt-0">
+      <div class="container">
+        <h2 class="h3 mb-4">También te puede interesar</h2>
+        <div class="row g-4">
+          @for (r of related.value(); track r.id) {
+            <div class="col-md-6 col-lg-4"><app-product-card [product]="r" /></div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+} @else {
+  <app-empty-state icon="bi-search" title="Producto no encontrado" [message]="data.error() ?? 'Es posible que ya no esté disponible.'">
+    <a routerLink="/servicios" class="btn btn-brand">Ver catálogo</a>
+  </app-empty-state>
+}
+
