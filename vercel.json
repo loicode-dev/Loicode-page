@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "dist/loicode/browser",
+  "buildCommand": "npm run build",
+  "rewrites": [
+    {
+      "source": "/invitaciones/misXV/:match*",
+      "destination": "/invitaciones/misXV/:match*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
