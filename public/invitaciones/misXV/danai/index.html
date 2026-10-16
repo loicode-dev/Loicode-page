@@ -69,14 +69,19 @@
     }
     body.locked { overflow: hidden; height: 100vh; }
 
-    /* Fondo plateado fijo (funciona también en iOS) */
+    /* Fondo plateado fijo con sutil velo dorado champagne */
     .bg-fixed {
       position: fixed; inset: 0; z-index: 0;
       background: url('assets/fondo_plata.jpg') center / cover no-repeat;
     }
     .bg-fixed::after {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 40%, rgba(150, 165, 190, .25) 100%);
+      background:
+        radial-gradient(ellipse at 50% 15%, rgba(254, 243, 199, .32) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 65%, rgba(212, 175, 55, .22) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 85%, rgba(246, 230, 159, .24) 0%, transparent 55%),
+        radial-gradient(ellipse at center, transparent 30%, rgba(184, 143, 40, .16) 100%);
+      pointer-events: none;
     }
 
     /* Columna tipo teléfono */
@@ -84,7 +89,7 @@
       position: relative; z-index: 1;
       max-width: 480px; margin: 0 auto;
       overflow-x: clip;
-      box-shadow: 0 0 60px rgba(19, 36, 84, .35);
+      box-shadow: 0 0 60px rgba(19, 36, 84, .25), 0 0 35px rgba(212, 175, 55, .2);
     }
 
     /* ─────────── Destellos (estrellas que titilan en dorado y azul) ─────────── */
@@ -171,13 +176,13 @@
     /* ─────────── SECCIONES ─────────── */
     .sec { position: relative; padding: 3.4rem 1.4rem; }
 
-    /* Marco con doble línea azul y dorada */
+    /* Marco con doble línea azul y dorada sobre fondo luminoso con matiz dorado */
     .frame {
       position: relative;
       padding: 4.2rem 1.6rem 3.6rem;
       background:
-        radial-gradient(ellipse at center, rgba(255,255,255,.94) 0%, rgba(255,255,255,.76) 60%, rgba(246,249,255,.62) 100%);
-      box-shadow: 0 10px 40px rgba(19, 36, 84, .16), 0 0 0 1px rgba(212, 175, 55, .3), inset 0 0 40px rgba(255,255,255,.9);
+        radial-gradient(ellipse at center, rgba(255,255,255,.96) 0%, rgba(255,253,246,.85) 60%, rgba(248,245,236,.72) 100%);
+      box-shadow: 0 10px 40px rgba(19, 36, 84, .16), 0 0 0 1px rgba(212, 175, 55, .35), inset 0 0 40px rgba(255,255,255,.9);
       -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
     }
     .frame::before, .frame::after {
@@ -358,7 +363,10 @@
     .intro {
       position: fixed; inset: 0; z-index: 100;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: url('assets/fondo_plata.jpg') center / cover no-repeat, var(--silver-2);
+      background:
+        radial-gradient(ellipse at 50% 25%, rgba(254, 243, 199, .28) 0%, transparent 60%),
+        radial-gradient(ellipse at center, transparent 35%, rgba(184, 143, 40, .15) 100%),
+        url('assets/fondo_plata.jpg') center / cover no-repeat, var(--silver-2);
       transition: opacity 1s ease, visibility 1s ease;
       overflow: hidden;
     }
@@ -446,8 +454,8 @@
 
   <!-- ═════════════ INTRO: SOBRE CON SELLO ═════════════ -->
   <div class="intro" id="intro">
-    <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-    <img class="rose br" src="assets/rosas_esquina.png" alt="">
+    <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+    <img class="rose bl" src="assets/rosas_esquina.png" alt="">
     <div class="sparkles" data-count="28"></div>
 
     <div class="intro-title">Tienes una invitación</div>
@@ -497,8 +505,8 @@
     <!-- 2 · MENSAJE + FOTO + CUENTA REGRESIVA -->
     <section class="sec" id="mensaje">
       <div class="frame">
-        <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-        <img class="rose br" src="assets/rosas_esquina.png" alt="">
+        <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+        <img class="rose bl" src="assets/rosas_esquina.png" alt="">
         <div class="sparkles" data-count="14"></div>
         <div class="content">
           <div class="sec-title" data-aos="fade-up">Mis XV Años</div>
@@ -506,8 +514,8 @@
 
           <div class="arch" data-aos="zoom-in">
             <img src="assets/danai_2.jpg" alt="Danai">
-            <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-            <img class="rose br" src="assets/rosas_esquina.png" alt="">
+            <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+            <img class="rose bl" src="assets/rosas_esquina.png" alt="">
           </div>
 
           <div class="quote" data-aos="fade-up">
@@ -530,8 +538,8 @@
     <!-- 3 · PADRES Y MADRINAS -->
     <section class="sec">
       <div class="frame">
-        <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-        <img class="rose br" src="assets/rosas_esquina.png" alt="">
+        <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+        <img class="rose bl" src="assets/rosas_esquina.png" alt="">
         <div class="sparkles" data-count="12"></div>
         <div class="content">
           <div class="sec-title" data-aos="fade-up">Con la bendición de</div>
@@ -557,8 +565,8 @@
     <!-- 4 · CEREMONIA Y RECEPCIÓN -->
     <section class="sec">
       <div class="frame">
-        <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-        <img class="rose br" src="assets/rosas_esquina.png" alt="">
+        <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+        <img class="rose bl" src="assets/rosas_esquina.png" alt="">
         <div class="sparkles" data-count="12"></div>
         <div class="content">
           <div class="sec-title" data-aos="fade-up">¿Dónde y cuándo?</div>
@@ -592,8 +600,8 @@
     <!-- 5 · ITINERARIO -->
     <section class="sec">
       <div class="frame">
-        <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-        <img class="rose br" src="assets/rosas_esquina.png" alt="">
+        <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+        <img class="rose bl" src="assets/rosas_esquina.png" alt="">
         <div class="sparkles" data-count="12"></div>
         <div class="content">
           <div class="sec-title" data-aos="fade-up">Itinerario</div>
@@ -639,8 +647,8 @@
     <!-- 6 · CÓDIGO DE VESTIMENTA -->
     <section class="sec">
       <div class="frame">
-        <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-        <img class="rose br" src="assets/rosas_esquina.png" alt="">
+        <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+        <img class="rose bl" src="assets/rosas_esquina.png" alt="">
         <div class="sparkles" data-count="12"></div>
         <div class="content">
           <div class="sec-title" data-aos="fade-up">Vestimenta</div>
@@ -757,8 +765,8 @@
     <!-- 7 · GALERÍA Y CIERRE -->
     <section class="sec">
       <div class="frame">
-        <img class="rose tl" src="assets/rosas_esquina.png" alt="">
-        <img class="rose br" src="assets/rosas_esquina.png" alt="">
+        <img class="rose tr" src="assets/rosas_esquina.png" alt="">
+        <img class="rose bl" src="assets/rosas_esquina.png" alt="">
         <div class="sparkles" data-count="14"></div>
         <div class="content">
           <div class="sec-title" data-aos="fade-up">¡Te esperamos!</div>
