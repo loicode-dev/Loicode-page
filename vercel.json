@@ -8,6 +8,18 @@
       "destination": "/invitaciones/misXV/:match*"
     },
     {
+      "source": "/invitaciones/babyShower/:match*",
+      "destination": "/invitaciones/babyShower/:match*"
+    },
+    {
+      "source": "/invitaciones/babyshower/:match*",
+      "destination": "/invitaciones/babyShower/:match*"
+    },
+    {
+      "source": "/invitaciones/:match*",
+      "destination": "/invitaciones/:match*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

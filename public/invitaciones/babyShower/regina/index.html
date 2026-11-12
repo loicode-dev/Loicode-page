@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Baby Shower de Regina | 19 de Diciembre 2026</title>
+
+  <!-- Open Graph / WhatsApp / Social Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.loicode.lat/invitaciones/babyShower/regina/index.html" />
+  <meta property="og:site_name" content="Baby Shower de Regina" />
+  <meta property="og:title" content="🐷🎀 Baby Shower de Regina 🎀🐷" />
+  <meta property="og:description" content="Enrique Vergara Albarrán y Marlene Barriga Betancourt te invitan a celebrar la dulce espera de su pequeña princesa Regina. Sábado 19 de Diciembre del 2026 · 1:30 PM." />
+  <meta property="og:image" content="https://www.loicode.lat/invitaciones/babyShower/regina/assets/preview_share.jpg?v=1" />
+  <meta property="og:image:secure_url" content="https://www.loicode.lat/invitaciones/babyShower/regina/assets/preview_share.jpg?v=1" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="Invitación Digital - Baby Shower de Regina" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🐷🎀 Baby Shower de Regina 🎀🐷" />
+  <meta name="twitter:description" content="Acompáñanos a celebrar la dulce llegada de Regina este Sábado 19 de Diciembre del 2026 a la 1:30 PM." />
+  <meta name="twitter:image" content="https://www.loicode.lat/invitaciones/babyShower/regina/assets/preview_share.jpg?v=1" />
+  <meta name="theme-color" content="#f8bbd0" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Great+Vibes&family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --pink-lightest: #fff7fa;
+      --pink-cream: #fff0f5;
+      --pink-pastel: #fce0ec;
+      --pink-soft: #f8bbd0;
+      --pink-medium: #f28eb2;
+      --pink-rose: #df578a;
+      --pink-deep: #c4366c;
+      --peach-pastel: #ffe8df;
+      --lavender-pastel: #f7ebfc;
+      --cocoa-dark: #5a382b;
+      --cocoa-soft: #7b5243;
+      --card-bg: rgba(255, 255, 255, 0.90);
+      --border-pastel: rgba(242, 142, 178, 0.45);
+      --shadow-soft: 0 14px 36px rgba(214, 108, 148, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--pink-lightest);
+      color: var(--cocoa-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      background-image:
+        radial-gradient(rgba(244, 143, 177, 0.22) 2.5px, transparent 2.5px),
+        radial-gradient(rgba(248, 187, 208, 0.18) 2.5px, var(--pink-lightest) 2.5px);
+      background-size: 36px 36px;
+      background-position: 0 0, 18px 18px;
+    }
+
+    body.locked {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Fixed Watercolor Pastel Background Overlay */
+    .watercolor-bg {
+      position: fixed;
+      inset: 0;
+      background: url('assets/fondo_pastel.jpg') center center / cover no-repeat;
+      opacity: 0.42;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Floating Hearts & Piggy Bubbles Canvas */
+    #particles-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ==========================================
+       1. INTRO ENVELOPE OVERLAY (PASTEL PINK)
+       ========================================== */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background:
+        radial-gradient(circle at 50% 25%, #fff9fb 0%, #fde2ed 58%, #f8c3d8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease, transform 1s ease;
+    }
+
+    .intro-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.7) 3px, transparent 3px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+
+    .intro-overlay.opened {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.08);
+      pointer-events: none;
+    }
+
+    .intro-header {
+      text-align: center;
+      margin-bottom: 24px;
+      z-index: 3;
+      animation: floatSoft 3.5s ease-in-out infinite;
+    }
+
+    .intro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid #f4a4c0;
+      color: var(--pink-deep);
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      box-shadow: 0 6px 16px rgba(223, 87, 138, 0.15);
+      margin-bottom: 10px;
+    }
+
+    .intro-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.4rem, 9vw, 3.6rem);
+      color: var(--pink-rose);
+      text-shadow: 2px 3px 0px #ffffff, 0 6px 18px rgba(223, 87, 138, 0.22);
+      line-height: 1.15;
+    }
+
+    .intro-subtitle {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      color: var(--cocoa-soft);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* Pastel Envelope */
+    .envelope-wrapper {
+      position: relative;
+      width: min(330px, 88vw);
+      height: 225px;
+      cursor: pointer;
+      perspective: 1000px;
+      z-index: 3;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope-wrapper:hover {
+      transform: translateY(-4px);
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #f9c5d9 0%, #f4a8c5 100%);
+      border-radius: 14px;
+      box-shadow:
+        0 20px 45px rgba(196, 54, 108, 0.25),
+        0 0 0 3px #ffffff inset;
+      overflow: visible;
+    }
+
+    /* Polka-dot pattern on envelope */
+    .envelope::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.45) 2.5px, transparent 2.5px);
+      background-size: 22px 22px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Card peeking inside envelope */
+    .envelope-letter {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 14px;
+      bottom: 14px;
+      background: #ffffff;
+      border-radius: 12px;
+      border: 2px dashed #f4a8c5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-align: center;
+      z-index: 2;
+      transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .envelope-letter img {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+      border-radius: 50%;
+      margin-bottom: 4px;
+    }
+
+    .envelope-letter span {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.35rem;
+      color: var(--pink-rose);
+      line-height: 1.1;
+    }
+
+    .envelope-letter small {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.72rem;
+      color: var(--cocoa-soft);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Envelope Pocket Flaps */
+    .envelope-pocket {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .envelope-pocket::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 112px 0 112px 175px;
+      border-color: transparent transparent transparent #f7b8d0;
+    }
+
+    .envelope-pocket::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 112px 175px 112px 0;
+      border-color: transparent #f5b0ca transparent transparent;
+    }
+
+    .envelope-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 125px;
+      background: linear-gradient(180deg, #fbd2e2 0%, #f6b6ce 100%);
+      clip-path: polygon(0 100%, 50% 12%, 100% 100%);
+      border-radius: 0 0 14px 14px;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* Top Flap */
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 132px;
+      background: linear-gradient(180deg, #f39ec0 0%, #f7bdd3 100%);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      border-radius: 14px 14px 0 0;
+      transform-origin: top center;
+      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.3s;
+      z-index: 5;
+      pointer-events: none;
+      filter: drop-shadow(0 5px 8px rgba(196, 54, 108, 0.18));
+    }
+
+    /* Cute Piggy / Bow Seal Button */
+    .wax-seal {
+      position: absolute;
+      top: 56%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 30%, #ff9ebb 0%, #e45c90 68%, #c73c71 100%);
+      border: 3px solid #fff5f8;
+      box-shadow:
+        0 8px 22px rgba(196, 54, 108, 0.38),
+        0 0 0 4px rgba(244, 143, 177, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 6;
+      transition: transform 0.45s ease, opacity 0.45s ease;
+      animation: sealPulse 2s infinite;
+    }
+
+    .wax-seal .seal-piggy {
+      font-size: 1.9rem;
+      line-height: 1;
+      filter: drop-shadow(0 2px 3px rgba(90, 56, 43, 0.25));
+    }
+
+    .wax-seal .seal-sub {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.58rem;
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .envelope-wrapper.opening .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-wrapper.opening .envelope-letter {
+      transform: translateY(-95px) scale(1.04);
+      z-index: 6;
+    }
+
+    .envelope-wrapper.opening .wax-seal {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+
+    .tap-instruction {
+      margin-top: 28px;
+      z-index: 3;
+      background: #ffffff;
+      color: var(--pink-deep);
+      border: 2px solid #f4a4c0;
+      padding: 11px 26px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 20px rgba(223, 87, 138, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      animation: bounceGentle 2.2s infinite;
+    }
+
+    .tap-instruction i {
+      color: var(--pink-rose);
+    }
+
+    /* ==========================================
+       2. FLOATING MUSIC CONTROL BUTTON
+       ========================================== */
+    .music-btn {
+      position: fixed;
+      bottom: 22px;
+      right: 20px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9ebb 0%, #df578a 100%);
+      border: 3px solid #ffffff;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      z-index: 950;
+      box-shadow: 0 8px 24px rgba(223, 87, 138, 0.38);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .music-btn.playing::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid rgba(223, 87, 138, 0.55);
+      animation: soundWave 1.8s infinite ease-out;
+    }
+
+    .music-btn.playing i {
+      animation: spinSlow 5s linear infinite;
+    }
+
+    .music-tooltip {
+      position: fixed;
+      bottom: 30px;
+      right: 84px;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--cocoa-dark);
+      border: 1.5px solid #f4a8c5;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(223, 87, 138, 0.16);
+      z-index: 949;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .music-tooltip.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ==========================================
+       3. MAIN INVITATION CONTAINER
+       ========================================== */
+    .invitation-container {
+      max-width: 540px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+      padding-bottom: 60px;
+      box-shadow: 0 0 60px rgba(223, 87, 138, 0.14);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 248, 251, 0.85) 0%,
+        rgba(253, 232, 241, 0.78) 50%,
+        rgba(255, 246, 250, 0.88) 100%
+      );
+      overflow: hidden;
+    }
+
+    /* Decorative floral corners */
+    .floral-corner {
+      position: absolute;
+      width: 175px;
+      height: auto;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.92;
+    }
+
+    .floral-top-right {
+      top: 0;
+      right: 0;
+    }
+
+    .floral-top-left {
+      top: 0;
+      left: 0;
+      transform: scaleX(-1);
+    }
+
+    /* ==========================================
+       4. HERO / PORTADA SECTION
+       ========================================== */
+    .hero-section {
+      position: relative;
+      padding: 52px 22px 36px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 2px solid #f5b0ca;
+      color: var(--pink-deep);
+      padding: 7px 20px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      box-shadow: 0 6px 16px rgba(223, 87, 138, 0.14);
+      margin-bottom: 18px;
+      z-index: 3;
+    }
+
+    /* Main Emblem Sticker Frame */
+    .emblem-frame {
+      position: relative;
+      width: min(350px, 86vw);
+      height: min(350px, 86vw);
+      margin: 4px auto 20px;
+      border-radius: 50%;
+      padding: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #fde0ec 50%, #f8bbd0 100%);
+      box-shadow:
+        0 18px 42px rgba(212, 85, 134, 0.24),
+        0 0 0 6px rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      animation: floatSoft 4.2s ease-in-out infinite;
+    }
+
+    .emblem-frame::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2.5px dashed #f28eb2;
+      animation: spinSlow 36s linear infinite;
+      pointer-events: none;
+    }
+
+    .emblem-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .hero-announce {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--cocoa-dark);
+      max-width: 390px;
+      line-height: 1.5;
+      margin-top: 6px;
+      z-index: 3;
+    }
+
+    .hero-baby-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      border: 2px solid #ffffff;
+      color: var(--cocoa-dark);
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 0.98rem;
+      box-shadow: 0 8px 20px rgba(223, 87, 138, 0.16);
+      z-index: 3;
+    }
+
+    .hero-date-banner {
+      margin-top: 22px;
+      background: #ffffff;
+      border: 2px solid #f5b0ca;
+      border-radius: 24px;
+      padding: 16px 26px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 3;
+    }
+
+    .date-col {
+      text-align: center;
+    }
+
+    .date-col .day-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pink-deep);
+    }
+
+    .date-col .day-number {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.7rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--cocoa-dark);
+      margin: 2px 0;
+    }
+
+    .date-col .month-year {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--cocoa-soft);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .date-divider {
+      width: 2px;
+      height: 56px;
+      background: linear-gradient(180deg, transparent, #f28eb2, transparent);
+    }
+
+    .time-col {
+      text-align: center;
+    }
+
+    .time-col .time-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cocoa-soft);
+    }
+
+    .time-col .time-value {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--pink-rose);
+      margin-top: 2px;
+    }
+
+    /* ==========================================
+       5. CUTE PIGGY DIVIDER
+       ========================================== */
+    .piggy-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 12px auto;
+      padding: 0 28px;
+      color: var(--pink-medium);
+      font-size: 1.1rem;
+    }
+
+    .piggy-divider::before,
+    .piggy-divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        #f28eb2 0px,
+        #f28eb2 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    }
+
+    .piggy-snout-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 28px;
+      background: #ffb6c9;
+      border: 2px solid #df578a;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 3px 8px rgba(223, 87, 138, 0.2);
+    }
+
+    .piggy-snout-icon::before,
+    .piggy-snout-icon::after {
+      content: '';
+      width: 6px;
+      height: 9px;
+      background: #8c3b58;
+      border-radius: 50%;
+      margin: 0 3px;
+    }
+
+    /* ==========================================
+       6. REUSABLE PASTEL CARDS
+       ========================================== */
+    .section-wrap {
+      padding: 18px 20px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .pastel-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 28px;
+      border: 2.5px solid #fad2e1;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pastel-card::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 22px;
+      border: 1.5px dashed rgba(242, 142, 178, 0.55);
+      pointer-events: none;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: #fde4ec;
+      color: var(--pink-deep);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.9rem, 6.5vw, 2.45rem);
+      color: var(--pink-rose);
+      margin-bottom: 12px;
+      line-height: 1.25;
+      text-shadow: 1px 2px 0px #ffffff;
+    }
+
+    .section-text {
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: var(--cocoa-dark);
+      font-weight: 500;
+    }
+
+    /* ==========================================
+       7. SWEET QUOTE & PIGGY BALLOONS ILLUSTRATION
+       ========================================== */
+    .piggy-illustration-box {
+      width: min(260px, 72vw);
+      margin: 0 auto 14px;
+      position: relative;
+      animation: floatSoft 3.8s ease-in-out infinite;
+    }
+
+    .piggy-illustration-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 18px rgba(214, 108, 148, 0.2));
+    }
+
+    .quote-highlight {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      color: var(--pink-deep);
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* ==========================================
+       8. PARENTS SECTION (PAPÁS DE REGINA)
+       ========================================== */
+    .parents-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .parent-box {
+      background: linear-gradient(135deg, #fff5f8 0%, #fde8f0 100%);
+      border: 2px solid #f7bfd4;
+      border-radius: 20px;
+      padding: 16px 18px;
+      position: relative;
+      box-shadow: 0 6px 16px rgba(223, 87, 138, 0.1);
+    }
+
+    .parent-role {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pink-deep);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .parent-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: var(--cocoa-dark);
+      line-height: 1.3;
+    }
+
+    .parents-heart-connector {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #f4a4c0;
+      color: var(--pink-rose);
+      margin: -6px auto;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(223, 87, 138, 0.15);
+    }
+
+    .baby-name-showcase {
+      margin-top: 20px;
+      padding: 16px 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      border: 2px solid #ffffff;
+      box-shadow: 0 8px 22px rgba(223, 87, 138, 0.18);
+    }
+
+    .baby-name-showcase .label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--cocoa-dark);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .baby-name-showcase .regina-script {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      color: var(--pink-deep);
+      text-shadow: 2px 2px 0px #ffffff;
+      line-height: 1.15;
+      margin-top: 2px;
+    }
+
+    /* ==========================================
+       9. COUNTDOWN TIMER SECTION
+       ========================================== */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .count-item {
+      background: linear-gradient(180deg, #ffffff 0%, #fff0f5 100%);
+      border: 2px solid #f5b0ca;
+      border-radius: 18px;
+      padding: 14px 6px;
+      box-shadow: 0 8px 18px rgba(223, 87, 138, 0.14);
+      position: relative;
+    }
+
+    .count-number {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1.55rem, 5.5vw, 2.1rem);
+      font-weight: 700;
+      color: var(--pink-rose);
+      line-height: 1;
+    }
+
+    .count-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--cocoa-soft);
+      margin-top: 6px;
+    }
+
+    /* ==========================================
+       10. LOCATION & EVENT DETAILS SECTION
+       ========================================== */
+    .location-icon-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fde0ec 0%, #f8bbd0 100%);
+      border: 3px solid #ffffff;
+      box-shadow: 0 8px 20px rgba(223, 87, 138, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 1.75rem;
+      color: var(--pink-deep);
+    }
+
+    .info-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .info-pill {
+      background: #fff5f8;
+      border: 1.5px solid #f4a8c5;
+      border-radius: 14px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--cocoa-dark);
+    }
+
+    .info-pill i {
+      color: var(--pink-rose);
+      font-size: 1.05rem;
+    }
+
+    .address-box {
+      background: linear-gradient(135deg, #fff9fb 0%, #fdebf2 100%);
+      border: 2px dashed #f28eb2;
+      border-radius: 20px;
+      padding: 18px 18px;
+      margin: 16px 0 22px;
+    }
+
+    .address-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--pink-deep);
+      margin-bottom: 6px;
+    }
+
+    .address-text {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--cocoa-dark);
+      line-height: 1.55;
+    }
+
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #ec6698 0%, #c93b70 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      padding: 14px 30px;
+      border-radius: 999px;
+      border: 2.5px solid #ffffff;
+      box-shadow: 0 10px 24px rgba(201, 59, 112, 0.34);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-maps:hover,
+    .btn-maps:active {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 28px rgba(201, 59, 112, 0.44);
+    }
+
+    /* ==========================================
+       11. BABY SHOWER ACTIVITIES / HIGHLIGHTS
+       ========================================== */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .activity-card {
+      background: #fff6f9;
+      border: 1.5px solid #f5b8ce;
+      border-radius: 18px;
+      padding: 14px 8px;
+      text-align: center;
+    }
+
+    .activity-emoji {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .activity-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--cocoa-dark);
+    }
+
+    /* ==========================================
+       12. FOOTER / CLOSING SECTION
+       ========================================== */
+    .footer-section {
+      text-align: center;
+      padding: 26px 22px 30px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .footer-emblem-mini {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      border: 4px solid #ffffff;
+      box-shadow: 0 10px 25px rgba(223, 87, 138, 0.25);
+      overflow: hidden;
+    }
+
+    .footer-emblem-mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .footer-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.1rem;
+      color: var(--pink-rose);
+      margin-bottom: 6px;
+      text-shadow: 1px 2px 0px #ffffff;
+    }
+
+    .footer-sub {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.98rem;
+      color: var(--cocoa-soft);
+      font-weight: 500;
+      max-width: 340px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Keyframes */
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes sealPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.07); }
+    }
+
+    @keyframes bounceGentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes soundWave {
+      0% { transform: scale(1); opacity: 0.85; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 380px) {
+      .hero-date-banner {
+        padding: 14px 16px;
+        gap: 12px;
+      }
+      .date-col .day-number {
+        font-size: 2.3rem;
+      }
+      .time-col .time-value {
+        font-size: 1.4rem;
+      }
+      .countdown-grid {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- Background Music (Loops continuously while on the page) -->
+  <audio id="bgMusic" src="assets/cancion.mp3" loop preload="auto"></audio>
+
+  <!-- Pastel Watercolor Background -->
+  <div class="watercolor-bg"></div>
+
+  <!-- Floating Pastel Hearts & Bubbles Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ==========================================
+       INTERACTIVE ENVELOPE INTRO OVERLAY
+       ========================================== -->
+  <div class="intro-overlay" id="introOverlay">
+    <div class="intro-header">
+      <div class="intro-badge">
+        <span>🐷</span>
+        <span>¡Es una Niña!</span>
+        <span>🎀</span>
+      </div>
+      <h1 class="intro-title">Baby Shower<br>de Regina</h1>
+      <p class="intro-subtitle">Tienes una invitación muy especial</p>
+    </div>
+
+    <div class="envelope-wrapper" id="envelopeBtn" role="button" aria-label="Abrir invitación">
+      <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-letter">
+          <img src="assets/emblema_regina.png" alt="Baby Shower de Regina" />
+          <span>Regina</span>
+          <small>19 · Diciembre · 2026</small>
+        </div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-bottom"></div>
+        <div class="wax-seal">
+          <span class="seal-piggy">🐷</span>
+          <span class="seal-sub">Abrir</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="tap-instruction" id="openBtnText" type="button">
+      <i class="fa-solid fa-heart"></i>
+      <span>Toca el sobre para abrir</span>
+      <i class="fa-solid fa-music"></i>
+    </button>
+  </div>
+
+  <!-- Floating Music Button -->
+  <div class="music-tooltip" id="musicTooltip">🎵 Música de Regina</div>
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Controlar música">
+    <i class="fa-solid fa-music" id="musicIcon"></i>
+  </button>
+
+  <!-- ==========================================
+       MAIN INVITATION CONTENT
+       ========================================== -->
+  <main class="invitation-container">
+    <!-- Top Watercolor Floral & Bow Corners -->
+    <img src="assets/esquina_flores.png" alt="" class="floral-corner floral-top-right" />
+    <img src="assets/esquina_flores.png" alt="" class="floral-corner floral-top-left" />
+
+    <!-- 1. HERO / PORTADA -->
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span>🎀</span>
+        <span>Dulce Espera</span>
+        <span>🎀</span>
+      </div>
+
+      <!-- Main Sticker Emblem -->
+      <div class="emblem-frame">
+        <img src="assets/emblema_regina.png" alt="Baby Shower de Regina" />
+      </div>
+
+      <p class="hero-announce">
+        ¡Una pequeña princesita está en camino para llenar nuestro hogar de amor, ternura y alegría!
+      </p>
+
+      <div class="hero-baby-badge">
+        <span>🐷</span>
+        <span>Nuestra bebé <strong>Regina</strong> está por llegar</span>
+        <span>🌸</span>
+      </div>
+
+      <!-- Date & Time Highlight Banner -->
+      <div class="hero-date-banner">
+        <div class="date-col">
+          <div class="day-name">Sábado</div>
+          <div class="day-number">19</div>
+          <div class="month-year">Diciembre 2026</div>
+        </div>
+        <div class="date-divider"></div>
+        <div class="time-col">
+          <div class="time-label">Hora de Inicio</div>
+          <div class="time-value">1:30 PM</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cute Piggy Snout Divider -->
+    <div class="piggy-divider">
+      <i class="fa-solid fa-heart"></i>
+      <span class="piggy-snout-icon" aria-hidden="true"></span>
+      <i class="fa-solid fa-heart"></i>
+    </div>
+
+    <!-- 2. TENDER MESSAGE & PIGGY WITH BALLOONS -->
+    <section class="section-wrap reveal">
+      <div class="pastel-card">
+        <span class="section-tag">✨ Con Mucho Amor ✨</span>
+        <div class="piggy-illustration-box">
+          <img src="assets/puerquita_globos.png" alt="Puerquita con globos" />
+        </div>
+        <h2 class="section-title">¡Casi llega el gran día!</h2>
+        <p class="section-text">
+          Un pedacito de cielo late hoy bajo el corazón de mamá. Antes de tener a nuestra pequeña entre nuestros brazos, queremos compartir con ustedes la dicha de esperar su llegada.
+        </p>
+        <p class="quote-highlight">
+          «Te esperamos con todo el amor del mundo, pequeña Regina» 🐷💕
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. FUTUROS PAPÁS -->
+    <section class="section-wrap reveal">
+      <div class="pastel-card">
+        <span class="section-tag">👨‍👩‍👧 Los Futuros Papás</span>
+        <h2 class="section-title">Con la ilusión de sus papás</h2>
+        <p class="section-text">
+          Con inmensa felicidad, te invitamos a celebrar junto a nosotros la dulce espera de nuestra hija:
+        </p>
+
+        <div class="parents-grid">
+          <div class="parent-box">
+            <div class="parent-role">
+              <i class="fa-solid fa-heart"></i>
+              <span>Papá</span>
+            </div>
+            <div class="parent-name">Enrique Vergara Albarrán</div>
+          </div>
+
+          <div class="parents-heart-connector">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <div class="parent-box">
+            <div class="parent-role">
+              <i class="fa-solid fa-heart"></i>
+              <span>Mamá</span>
+            </div>
+            <div class="parent-name">Marlene Barriga Betancourt</div>
+          </div>
+        </div>
+
+        <div class="baby-name-showcase">
+          <div class="label">🎀 En honor a nuestra pequeña niña 🎀</div>
+          <div class="regina-script">Regina</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cute Piggy Snout Divider -->
+    <div class="piggy-divider">
+      <i class="fa-solid fa-heart"></i>
+      <span class="piggy-snout-icon" aria-hidden="true"></span>
+      <i class="fa-solid fa-heart"></i>
+    </div>
+
+    <!-- 4. COUNTDOWN TIMER -->
+    <section class="section-wrap reveal">
+      <div class="pastel-card">
+        <span class="section-tag">⏳ Cuenta Regresiva</span>
+        <h2 class="section-title">Falta muy poquito</h2>
+        <p class="section-text">
+          Cada segundo nos acerca más a celebrar juntos la dulce llegada de <strong>Regina</strong>:
+        </p>
+
+        <div class="countdown-grid" id="countdown">
+          <div class="count-item">
+            <div class="count-number" id="cd-days">00</div>
+            <div class="count-label">Días</div>
+          </div>
+          <div class="count-item">
+            <div class="count-number" id="cd-hours">00</div>
+            <div class="count-label">Horas</div>
+          </div>
+          <div class="count-item">
+            <div class="count-number" id="cd-mins">00</div>
+            <div class="count-label">Minutos</div>
+          </div>
+          <div class="count-item">
+            <div class="count-number" id="cd-secs">00</div>
+            <div class="count-label">Segundos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. LOCATION & DATE DETAILS -->
+    <section class="section-wrap reveal">
+      <div class="pastel-card">
+        <div class="location-icon-circle">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <span class="section-tag">📍 ¿Dónde y Cuándo?</span>
+        <h2 class="section-title">Lugar de la Celebración</h2>
+
+        <div class="info-pills-row">
+          <div class="info-pill">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Sábado 19 de Diciembre del 2026</span>
+          </div>
+          <div class="info-pill">
+            <i class="fa-regular fa-clock"></i>
+            <span>1:30 PM</span>
+          </div>
+        </div>
+
+        <div class="address-box">
+          <div class="address-title">Dirección del Evento</div>
+          <p class="address-text">
+            Álvaro Obregón 79F, C.P. 54942,<br />
+            Benito Juárez, Tultitlán,<br />
+            Estado de México
+          </p>
+        </div>
+
+        <a
+          href="https://maps.app.goo.gl/fmn3qJMsBhkJfiVR8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-maps"
+        >
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Ver Ubicación en Google Maps</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 6. CELEBRATION HIGHLIGHTS -->
+    <section class="section-wrap reveal">
+      <div class="pastel-card">
+        <span class="section-tag">🐷 Celebremos Juntos 🐷</span>
+        <h2 class="section-title">Una tarde inolvidable</h2>
+        <p class="section-text">
+          Preparamos con mucho cariño una tarde llena de alegría, juegos y sorpresas para darle la bienvenida a nuestra pequeña <strong>Regina</strong>.
+        </p>
+
+        <div class="activities-grid">
+          <div class="activity-card">
+            <span class="activity-emoji">🍼</span>
+            <span class="activity-name">Juegos y Dinámicas</span>
+          </div>
+          <div class="activity-card">
+            <span class="activity-emoji">🧁</span>
+            <span class="activity-name">Deliciosos Postres</span>
+          </div>
+          <div class="activity-card">
+            <span class="activity-emoji">🎀</span>
+            <span class="activity-name">Mucho Cariño</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="footer-section reveal">
+      <div class="footer-emblem-mini">
+        <img src="assets/emblema_regina.png" alt="Baby Shower de Regina" />
+      </div>
+      <h3 class="footer-title">¡Te esperamos!</h3>
+      <p class="footer-sub">
+        Tu presencia será el mejor regalo para nuestra pequeña <strong>Regina</strong>.<br />
+        Con cariño, <strong>Enrique y Marlene</strong> 💕
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const introOverlay = document.getElementById('introOverlay');
+      const envelopeBtn = document.getElementById('envelopeBtn');
+      const openBtnText = document.getElementById('openBtnText');
+      const bgMusic = document.getElementById('bgMusic');
+      const musicBtn = document.getElementById('musicBtn');
+      const musicIcon = document.getElementById('musicIcon');
+      const musicTooltip = document.getElementById('musicTooltip');
+
+      let isOpened = false;
+      let userPaused = false;
+
+      // Ensure loop property is strictly active
+      bgMusic.loop = true;
+      bgMusic.volume = 0.85;
+
+      function updateMusicUI(playing) {
+        if (playing) {
+          musicBtn.classList.add('playing');
+          musicIcon.className = 'fa-solid fa-compact-disc';
+        } else {
+          musicBtn.classList.remove('playing');
+          musicIcon.className = 'fa-solid fa-music';
+        }
+      }
+
+      function tryPlayMusic() {
+        if (userPaused) return;
+        const playPromise = bgMusic.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              updateMusicUI(true);
+            })
+            .catch(() => {
+              updateMusicUI(false);
+            });
+        }
+      }
+
+      // Extra safety if loop ever ends on certain mobile browsers
+      bgMusic.addEventListener('ended', function () {
+        if (!userPaused) {
+          bgMusic.currentTime = 0;
+          bgMusic.play().catch(() => {});
+        }
+      });
+
+      function launchPastelConfetti() {
+        if (typeof confetti !== 'function') return;
+        const colors = ['#f8bbd0', '#f48fb1', '#ec6698', '#fff0f5', '#ffd6e7'];
+        confetti({
+          particleCount: 75,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: colors
+        });
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0, y: 0.65 },
+            colors: colors
+          });
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1, y: 0.65 },
+            colors: colors
+          });
+        }, 300);
+      }
+
+      function openInvitation() {
+        if (isOpened) return;
+        isOpened = true;
+
+        tryPlayMusic();
+        envelopeBtn.classList.add('opening');
+        launchPastelConfetti();
+
+        setTimeout(() => {
+          introOverlay.classList.add('opened');
+          document.body.classList.remove('locked');
+          musicTooltip.classList.add('visible');
+          setTimeout(() => {
+            musicTooltip.classList.remove('visible');
+          }, 4000);
+        }, 750);
+      }
+
+      envelopeBtn.addEventListener('click', openInvitation);
+      openBtnText.addEventListener('click', openInvitation);
+
+      // Fallback interaction listener so music plays on first touch/scroll if needed
+      ['touchstart', 'click', 'scroll'].forEach((evt) => {
+        window.addEventListener(
+          evt,
+          function onFirstInteract(e) {
+            if (e.target && e.target.closest('#musicBtn')) return;
+            if (!userPaused && bgMusic.paused) {
+              tryPlayMusic();
+            }
+          },
+          { passive: true }
+        );
+      });
+
+      // Music button toggle
+      musicBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (bgMusic.paused) {
+          userPaused = false;
+          tryPlayMusic();
+        } else {
+          userPaused = true;
+          bgMusic.pause();
+          updateMusicUI(false);
+        }
+      });
+
+      // ==========================================
+      // COUNTDOWN TO DEC 19, 2026 13:30:00
+      // ==========================================
+      const eventDate = new Date('2026-12-19T13:30:00-06:00').getTime();
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-mins');
+      const secsEl = document.getElementById('cd-secs');
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = eventDate - now;
+
+        if (diff <= 0) {
+          daysEl.textContent = '00';
+          hoursEl.textContent = '00';
+          minsEl.textContent = '00';
+          secsEl.textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minsEl.textContent = String(mins).padStart(2, '0');
+        secsEl.textContent = String(secs).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // ==========================================
+      // SCROLL REVEAL OBSERVER
+      // ==========================================
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.14 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+
+      // ==========================================
+      // FLOATING PASTEL HEARTS & SOFT DOTS CANVAS
+      // ==========================================
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const palette = [
+        'rgba(244, 143, 177, 0.38)',
+        'rgba(248, 187, 208, 0.45)',
+        'rgba(223, 87, 138, 0.25)',
+        'rgba(255, 198, 217, 0.45)'
+      ];
+
+      const particles = Array.from({ length: 24 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: 6 + Math.random() * 10,
+        speedY: 0.25 + Math.random() * 0.45,
+        sway: Math.random() * Math.PI * 2,
+        swaySpeed: 0.01 + Math.random() * 0.015,
+        color: palette[Math.floor(Math.random() * palette.length)],
+        isHeart: Math.random() > 0.35
+      }));
+
+      function drawHeart(x, y, size, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        const topCurveHeight = size * 0.3;
+        ctx.moveTo(0, topCurveHeight);
+        ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
+        ctx.bezierCurveTo(-size / 2, (size + topCurveHeight) / 2, 0, (size + topCurveHeight) / 1.4, 0, size);
+        ctx.bezierCurveTo(0, (size + topCurveHeight) / 1.4, size / 2, (size + topCurveHeight) / 2, size / 2, topCurveHeight);
+        ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach((p) => {
+          p.y -= p.speedY;
+          p.sway += p.swaySpeed;
+          const drawX = p.x + Math.sin(p.sway) * 14;
+
+          if (p.y < -25) {
+            p.y = height + 20;
+            p.x = Math.random() * width;
+          }
+
+          if (p.isHeart) {
+            drawHeart(drawX, p.y, p.size, p.color);
+          } else {
+            ctx.beginPath();
+            ctx.arc(drawX, p.y, p.size * 0.4, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+          }
+        });
+        requestAnimationFrame(animateParticles);
+      }
+
+      animateParticles();
+    })();
+  </script>
+</body>
+</html>
